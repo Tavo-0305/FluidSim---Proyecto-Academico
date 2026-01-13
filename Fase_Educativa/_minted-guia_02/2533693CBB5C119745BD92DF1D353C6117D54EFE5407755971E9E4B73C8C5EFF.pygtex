@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{}Creación del objeto}
+\PYG{n}{sim} \PYG{o}{=} \PYG{n}{Simul}\PYG{p}{(}\PYG{n}{params}\PYG{p}{)}
+\PYG{c+c1}{\PYGZsh{}Se inicia la simulación}
+\PYG{n}{sim}\PYG{o}{.}\PYG{n}{time\PYGZus{}stepping}\PYG{o}{.}\PYG{n}{start}\PYG{p}{()}
+\end{Verbatim}

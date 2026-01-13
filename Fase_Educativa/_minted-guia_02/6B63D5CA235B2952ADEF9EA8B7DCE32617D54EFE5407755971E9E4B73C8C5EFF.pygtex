@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{fluidsim.solvers.ns2d.solver} \PYG{k+kn}{import} \PYG{n}{Simul}
+\PYG{n}{params} \PYG{o}{=} \PYG{n}{Simul}\PYG{o}{.}\PYG{n}{create\PYGZus{}default\PYGZus{}params}\PYG{p}{()}
+\end{Verbatim}

@@ -1,0 +1,151 @@
+\documentclass[aps,twocolumn,secnumarabic,nobalancelastpage,amsmath,amssymb,nofootinbib]{revtex4}
+\makeatletter
+\renewcommand*\andname{y}
+\makeatother
+
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{url}
+\usepackage{bm}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[letterpaper,top= 2.75cm,bottom=3.5cm,left=1.8cm,right=1.8cm]{geometry}
+\usepackage{ifsym}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{color}
+\usepackage{multienum}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{fancyhdr}
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{patterns,arrows,snakes,shapes,automata,plotmarks,backgrounds}
+\usepackage{lscape}
+\usepackage{titlesec}
+\usepackage{array,ragged2e}
+\newcolumntype{P}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\usepackage{float}
+\usepackage[pdfborder={0 0 0},colorlinks=false]{hyperref}
+\usepackage{xurl}
+\usepackage{adjustbox}
+\setlength{\columnsep}{7.5mm}
+\titleformat*{\section}{\normalsize\bfseries}
+\titleformat*{\subsection}{\normalsize\bfseries}
+\def\bibsection{\section*{\refname}}
+
+\begin{document}
+
+{\begin{center}
+\vskip-25pt
+{\includegraphics[width = 175mm]{logoImages/LogosInstitucionales.png}}
+\end{center}}
+
+\title{Implementación y evaluación del simulador Fluidsim como herramienta educativa y de investigación en dinámica de fluidos en la Escuela de Física de la UCR}
+\author{Gustavo Barboza Blanco}
+\email{gustavo.barbozablanco@ucr.ac.cr}
+\author{Tito Maldonado}
+\email{tito.maldonado@ucr.ac.cr}
+\affiliation{Escuela de Física, Universidad de Costa Rica}
+\date{\today}
+
+\begin{abstract}
+El presente anteproyecto analiza la implementación y evaluación del software \textit{Fluidsim} como herramienta educativa y de investigación en la Escuela de Física de la Universidad de Costa Rica. Este simulador, desarrollado dentro del proyecto \textit{FluidDyn}, constituye un marco modular y de código abierto para la dinámica de fluidos computacional (CFD) construido en Python, con capacidades de alto rendimiento y extensibilidad.  
+El objetivo es explorar y estudiar su potencial como apoyo en la enseñanza de la física de fluidos y, en paralelo, como plataforma de investigación para el modelado numérico de flujos turbulentos, transporte pasivo y sistemas no lineales. De esta manera, se busca promover la integración entre la formación teórica e investigación experimental y numérica, potenciando la reproducibilidad y el aprendizaje activo mediante herramientas libres.
+\end{abstract}
+
+\maketitle
+
+\section{Introducción}
+
+La dinámica de fluidos ocupa un papel central en la física actual, tanto desde el punto de vista teórico como experimental. Sin embargo, la naturaleza no lineal de las ecuaciones de Navier–Stokes y la complejidad de los fenómenos turbulentos hacen que el estudio de estos sistemas requiera de enfoques complementarios a la experimentación tradicional. En este contexto, la simulación computacional se ha consolidado como un método esencial para explorar regímenes dinámicos difíciles de alcanzar en el laboratorio y para validar hipótesis sobre el comportamiento de los flujos \cite{cambon2022turbulence}.  
+
+En el ámbito educativo, las simulaciones numéricas facilitan la comprensión de los conceptos fundamentales de la mecánica de fluidos, permitiendo observar el desarrollo de la vorticidad, la disipación viscosa o la formación de estructuras coherentes. Estudios como los de Adair et al. \cite{adair2014cfdeducation} y Sarimurat \cite{sarimurat2024cfdedu} muestran que la inclusión de herramientas de CFD en los cursos universitarios fomenta un aprendizaje más participativo, en el que el estudiante relaciona la teoría con resultados visuales concretos.  
+
+Desde una perspectiva investigativa, los avances en la dinámica de fluidos computacional (CFD) han abierto nuevas posibilidades para estudiar la turbulencia, el transporte de masa y energía, y los sistemas de ecuaciones no lineales acopladas. El trabajo de Cambon et al. (2022) destacan cómo las simulaciones directas (DNS) y los modelos multi-escala permiten abordar preguntas fundamentales sobre la naturaleza estadística de la turbulencia y su relación con la física de plasmas o flujos geofísicos. Estas mismas metodologías, en una escala más accesible, pueden implementarse en \textit{Fluidsim} para experimentos numéricos en el contexto universitario.  
+
+A diferencia de las herramientas comerciales, \textit{Fluidsim} ofrece una arquitectura de código abierto y modular, desarrollada en Python, que permite a los estudiantes y docentes extender o modificar los solvers existentes para abordar problemas personalizados. Esto lo convierte en una herramienta idónea tanto para la enseñanza como para la investigación de fenómenos físicos complejos en fluidos.
+
+\section{Objetivos}
+\subsection{Objetivo General}
+Implementar, adaptar y evaluar el uso del software \textit{Fluidsim} como herramienta educativa y de investigación en la dinámica de fluidos, con el fin de expandir la simulación computacional en la enseñanza universitaria y explorar su potencial para el modelado numérico en contextos de física y meteorología.
+\subsection{Objetivos Específicos}
+\begin{enumerate}
+    \item Adaptar el simulador \textit{Fluidsim} para su uso en cursos de física mediante guías y \textit{notebooks} demostrativos.
+    \item Diseñar visualizaciones y experimentos numéricos que ayuden a reducir la abstracción de los conceptos teóricos (vorticidad, continuidad, viscosidad, etc.).
+    \item Analizar la aplicabilidad del simulador en problemas básicos de investigación, como flujos turbulentos bidimensionales o transporte pasivo en fluidos.
+\end{enumerate}
+
+\section{Marco Teórico}
+
+\subsection{Fluidsim como herramienta de simulación}
+\textit{Fluidsim} es un marco de simulación numérica para fluidos construido en Python, forma parte del ecosistema \textit{FluidDyn}. Su arquitectura modular permite implementar ecuaciones de evolución para distintos sistemas (Navier–Stokes 2D y 3D, Boussinesq, magnetohidrodinámica, entre otros) \cite{mohanan2018fluidsim}.  
+A través de la resolución numérica de las ecuaciones diferenciales parciales mediante esquemas pseudo-espectrales, el software posibilita estudiar procesos de transporte, formación de vórtices y cascadas de energía. Estas capacidades hacen de \textit{Fluidsim} una herramienta versátil tanto en contextos educacionales como en investigación básica.
+
+\subsection{CFD en la investigación en física}
+En investigación, la CFD ha permitido desarrollar modelos que vinculan teoría y observación experimental en múltiples áreas de la física. Según Cambon et al. (2022), las simulaciones numéricas directas han sido esenciales para validar teorías estadísticas de la turbulencia y explorar la interacción entre rotación, estratificación y campos magnéticos.  
+El estudio de flujos turbulentos bidimensionales, por ejemplo, proporciona una base para comprender la dinámica de la atmósfera, los océanos y los plasmas confinados. \textit{Fluidsim}, al incluir solvers dedicados a estos regímenes, permite reproducir de manera controlada dichos sistemas y analizar magnitudes físicas como la energía cinética, el espectro de vorticidad y la tasa de disipación.  
+
+Asimismo, el simulador puede emplearse para modelar el transporte pasivo de trazadores o contaminantes, un problema relevante en física ambiental y fluidos geofísicos. Esto posiciona al proyecto como un punto de partida para futuras investigaciones que combinen análisis numérico, teoría de flujos y visualización científica.
+
+\subsection{Perspectiva educativa complementaria}
+La integración de simulaciones interactivas en la enseñanza de la física promueve un aprendizaje significativo. Según Pang et al. (2006), cuando los estudiantes manipulan modelos y observan sus resultados, desarrollan una comprensión más profunda de las relaciones entre las variables y de los principios subyacentes \cite{pang2006variation}.  
+En este sentido, el uso de \textit{Fluidsim} no solo busca modernizar la enseñanza, sino conectar la experiencia de aula con la investigación activa, fomentando una cultura de exploración científica reproducible y abierta.
+
+\section{Metodología}
+
+\subsection{Instalación y configuración del entorno}
+
+El primer paso consistirá en la instalación y configuración del entorno de trabajo que permite ejecutar el simulador \textit{Fluidsim} de forma estable. Para esto se utilizará el gestor de entornos \textit{Miniforge} junto con el sistema de paquetes \textit{Mamba}, recomendado por los desarrolladores del proyecto \textit{FluidDyn}. Esta combinación facilita la instalación controlada de dependencias y la compilación de extensiones optimizadas. Una vez completada la instalación, se procederá a ejecutar los ejemplos básicos disponibles en la documentación de \textit{Fluidsim}, con el fin de verificar el correcto funcionamiento de los módulos de simulación y visualización. Esta etapa también servirá para familiarizarse con la estructura interna del programa, comprendiendo cómo se definen los parámetros de simulación, cómo se inicializan los solvers y de qué manera se generan los resultados gráficos y numéricos.
+
+
+\subsection{Desarrollo de material educativo y experimental}
+
+En una segunda etapa, se elaborarán cuadernos interactivos en formato \textit{Jupyter Notebook}, que integren explicaciones teóricas con simulaciones numéricas elementales. Estos materiales estarán diseñados para acompañar cursos de física o laboratorios computacionales, de modo que permitan observar de forma visual conceptos como la ecuación de continuidad, la conservación de la masa o el desarrollo de la vorticidad en un flujo. El propósito es que cada cuaderno funcione como una guía progresiva: al ejecutar los códigos, el estudiante podrá observar cómo pequeños cambios en las condiciones iniciales o en la viscosidad modifican el comportamiento global del sistema. Estas simulaciones estarán acompañadas de comentarios explicativos y visualizaciones temporales que faciliten la interpretación física de los resultados.  
+
+En esta fase se pretende fortalecer el componente educativo del proyecto, no como una actividad independiente de la investigación, sino como un medio para construir comprensión conceptual a partir de la experimentación numérica. De este modo, la enseñanza y la exploración científica se articulan en un mismo espacio de aprendizaje reproducible.
+
+\subsection{Diseño de experimentos numéricos en física}
+
+La tercera etapa del proyecto estará dedicada al diseño de experimentos numéricos orientados a la exploración de fenómenos relevantes en dinámica de fluidos bidimensional. Para estas simulaciones se utilizará el solver \texttt{ns2d} incluido en \textit{Fluidsim}, el cual resuelve las ecuaciones de Navier–Stokes bidimensionales para un fluido incompresible en un dominio periódico. Este enfoque permite reproducir escenarios donde emergen vórtices, procesos de autoorganización y transporte escalar.
+
+El primer experimento estará dedicado al estudio de la formación de estructuras coherentes en turbulencia bidimensional, fenómeno característico de la transferencia inversa de energía documentada en trabajos recientes como el de Wang (2023) \cite{wang2023coherent}. En turbulencia 2D, los remolinos pequeños tienden a fusionarse en estructuras de mayor escala mediante la llamada \textit{cascada inversa}, lo que da lugar a vórtices persistentes y patrones de autoorganización.
+
+Para reproducir este comportamiento, se inicializará un campo de vorticidad aleatorio cuya evolución estará gobernada por la ecuación de vorticidad:
+
+\[
+\frac{\partial \omega}{\partial t}
++ \mathbf{u}\cdot\nabla\omega
+= \nu\nabla^2 \omega,
+\]
+
+donde $\omega = \partial_x v - \partial_y u$ es la vorticidad del flujo. Durante la simulación se analizará la evolución del campo de vorticidad, la energía cinética
+
+\[
+E(t)=\frac{1}{2}\int \left( u^2 + v^2 \right)\,dx\,dy,
+\]
+
+y los espectros de energía con el fin de identificar la transferencia hacia bajas frecuencias asociada a la cascada inversa. Los resultados obtenidos se compararán cualitativamente con los patrones documentados en \cite{wang2023coherent}, verificando la aparición de vórtices dominantes y estructuras coherentes que emergen a partir de condiciones iniciales aleatorias.
+
+El segundo experimento estudiará el transporte pasivo de un trazador escalar advectado por el flujo turbulento subyacente. La variable escalar $\theta(x,y,t)$ evolucionará según la ecuación de advección–difusión:
+
+\[
+\frac{\partial \theta}{\partial t}
++ \mathbf{u}\cdot\nabla \theta
+= D\,\nabla^2\theta,
+\]
+
+donde $D$ es el coeficiente de difusión. El flujo que advecta al trazador será el obtenido en el experimento anterior, de modo que el trazador interactúe con las estructuras coherentes generadas por la dinámica turbulenta. Esto permitirá observar estiramiento, distorsión y mezcla progresiva del trazador, fenómenos que constituyen un complemento natural al estudio de la turbulencia bidimensional.
+
+\medskip
+
+En ambos experimentos se documentarán detalladamente los parámetros físicos y numéricos utilizados —resolución espacial, viscosidad cinemática, paso de tiempo y condiciones iniciales— asegurando la reproducibilidad del trabajo. La comparación directa con los resultados de Wang (2023) permitirá evaluar la coherencia cualitativa de las simulaciones realizadas con \textit{Fluidsim}, destacando su potencial como herramienta educativa y de investigación en dinámica de fluidos.
+
+\section*{Agradecimientos}
+Se agradece el apoyo del profesor Tito Maldonado por el tiempo e inspiración, orientación y recursos académicos brindados para el desarrollo de este anteproyecto.
+
+\bibliography{sample-paper}
+\bibliographystyle{apsrev4-1}
+
+\end{document}
+

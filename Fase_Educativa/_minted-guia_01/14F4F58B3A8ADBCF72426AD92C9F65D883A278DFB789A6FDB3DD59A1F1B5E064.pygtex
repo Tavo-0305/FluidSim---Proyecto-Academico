@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{fluidsim.solvers.ns2d.solver} \PYG{k+kn}{import} \PYG{n}{Simul}
+\PYG{n}{params} \PYG{o}{=} \PYG{n}{Simul}\PYG{o}{.}\PYG{n}{create\PYGZus{}default\PYGZus{}params}\PYG{p}{()}
+\PYG{c+c1}{\PYGZsh{} Modify parameters as needed}
+\PYG{n}{sim} \PYG{o}{=} \PYG{n}{Simul}\PYG{p}{(}\PYG{n}{params}\PYG{p}{)}
+\PYG{n}{sim}\PYG{o}{.}\PYG{n}{time\PYGZus{}stepping}\PYG{o}{.}\PYG{n}{start}\PYG{p}{()}
+\end{Verbatim}

@@ -1,0 +1,170 @@
+\documentclass[12pt,letterpaper]{article}
+\input{preambulo}
+
+\begin{document}
+\section{Introducción}
+
+En esta guía usted aprenderá a instalar el simulador 
+\href{https://fluidsim.readthedocs.io/en/latest/index.html}{Fluidsim}
+que forma parte del ecosistema 
+\href{https://fluiddyn.readthedocs.io/en/latest/}{FluidDyn} 
+y funciona con \textbf{Python}. La instalación se 
+realizará utilizando el entorno \texttt{mamba} por medio de la distribución  
+\texttt{Miniforge3}. 
+
+
+Fluidsim recomienda explícitamente Miniforge o Mambaforge, en lugar de Anaconda o Miniconda.
+Esto evita conflictos con paquetes propietarios y resuelve mejor dependencias.
+
+\section{Requisitos Previos}
+Es necesario cumplir con los siguientes requisitos:
+
+\begin{itemize}
+    \item Conexión a internet.
+    \item Sistema operativo Linux, Windows o macOS.
+    \item Espacio libre en disco (mínimo 2 GB).
+\end{itemize}
+
+Si bien es posible utilizar el simulador en Windows, es más recomendable
+utilizar Linux. Pues las utilidades necesarias no
+funcionan de forma nativa en Windows, es necesario
+instalar \texttt{WSL2}, lo cual funciona como una capa de compatibilidad
+para entornos nativos de Linux dentro de Windows.
+
+Otra alternativa viable es utilizar una máquina virtual.
+
+\section{Instalación de Miniforge3}
+Primero debe abrir la terminal, verifique que está en la dirección
+\fbox{\textbackslash home} del sistema operativo. Si está en
+\texttt{Windows} debe usar \texttt{Powershell}.
+
+Para obtener el instalador de \texttt{Miniforge3} ejecute el siguiente
+comando en la terminal:
+
+\begin{minted}{bash}
+    wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh
+\end{minted}
+
+\textbf{Nota:} A la hora de copiar el código anterior, asegurese de que quede en una sola línea de comando.
+
+Una vez obtenido el instalador, lo ejecutamos de la siguiente forma:
+
+\begin{minted}{bash}
+    bash Miniforge3-Linux-x86_64.sh
+\end{minted}
+
+Cierre la terminal y abrala de nuevo. En frente de la línea de comandos
+deberá de leerse un \fbox{(base)} previo al directorio. 
+
+\section{Instalación de Fluidsim}
+
+Ahora ya se puede utilizar la herramienta \texttt{mamba}, para crear
+entornos y manejar paquetes. El primer paso será crear un entorno o 
+ambiente en donde se instalará todo lo referente al simulador. Ejecute 
+la siguiente línea: 
+
+\begin{minted}{bash}
+    mamba create -n fluidsim python
+\end{minted}
+
+Las descargas pueden tardar un poco. 
+
+Seguidamente debemos activar el entorno:
+
+\begin{minted}{bash}
+    mamba activate fluidsim
+\end{minted}
+
+Aquí verá que el entorno ya no es \fbox{(base)}, en su lugar será: \fbox{(fluidsim)}.
+
+Al hacer esto hemos creado un entorno con su ``propio'' \textbf{Python} y \textbf{PATH},
+todo esto se hace con el fin de no mezclar dependencias y evitar cualquier
+tipo de problemas o inconsistencias dentro del sistema. 
+
+Tal y como se recomienda en la documentación del simulador, se realizará
+la instalación principal mediante el comando \textbf{pip}:
+
+\begin{minted}{bash}
+    pip install fluidsim
+\end{minted}
+
+Y también será necesario instalar la dependencia principal de algunos
+solvers que utilizan el método pseudoespectral, junto la herramienta
+para ejecutar simulaciones en paralelo con \texttt{MPI}
+
+\begin{minted}{bash}
+    pip install "fluidsim[fft,mpi]"
+\end{minted}
+
+Con esto se instala la versión base del simulador, sin embargo se 
+recomiendan ciertas herramientas necesarias y útiles en el flujo
+de trabajo usual dentro del simulador, para ello usaremos \texttt{mamba}.
+
+Ejecute la siguiente línea:
+
+\begin{minted}{bash}
+    mamba install ipython numpy matplotlib ipympl scipy pandas jupyterlab jupyterlab-myst jupyterlab-spellchecker jupyterlab-variableinspector nb_conda_kernels ffmpeg
+\end{minted}
+
+\textbf{Nota:} Recuerde, a la hora de copiar el código anterior, asegurese de que quede en una sola línea de comando. 
+
+
+\section{Prueba de instalación}
+
+Para comprobar que la instalación se hizo de forma correcta, puede
+ejecutar una simulación rápida en ipython, ejecute el siguiente comando
+en la terminal:
+
+\begin{minted}{bash}
+ipython    
+\end{minted}
+Esto abrirá un ipython notebook, en donde basta con copiar y pegar el
+siguiente código:
+\begin{minted}{python}
+    from fluidsim.solvers.ns2d.solver import Simul
+    params = Simul.create_default_params()
+    # Modify parameters as needed
+    sim = Simul(params)
+    sim.time_stepping.start()
+\end{minted}
+
+Luego presione enter y en la terminal deberá de ver un output como este:
+
+\begin{figure}[H]
+\includegraphics[width=12cm]{images/testOutput.png}
+\centering
+\caption{Ouptut esperado de la simulación básica}
+\end{figure}
+
+Esto significa que se logró ejecutar una simulación básica. Todo funciona
+correctamente. 
+
+\section{Flujo de trabajo típico en Fluidsim}
+
+Recuerde que cada vez que quiera trabajar con el simulador debe de
+activar el entorno correspondiente, en este caso llamado: \texttt{fluidsim}. 
+Y una vez terminada la sesión de trabajo utilizando el simulador debe de desactivarlo
+para volver a la versión base de su sistema. Para ello debe usar el comando:
+
+\begin{minted}{bash}
+    mamba deactivate 
+\end{minted}
+
+\begin{figure}[H]
+\includegraphics[width=12cm]{images/workflow.pdf}
+\centering
+\caption{Flujo de trabajo típico en un entorno de mamba o conda}
+\end{figure}
+
+\subsection{Comentarios adicionales}
+\begin{itemize}
+    \item No es necesario trabajar en un notebook específico, usted puede
+    realizar scripts en su editor de código preferido y luego ejecutarlos en 
+    la terminal con el comando: \fbox{Python3 script.py}
+    \item Si debe eliminar el entorno por alguna razón, debe de usar el 
+    
+    comando: \fbox{mamba env remove -n fluidsim}
+\end{itemize}
+
+
+\end{document}

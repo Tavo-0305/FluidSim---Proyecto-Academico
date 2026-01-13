@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{}Creamos el objeto params}
+\PYG{n}{params} \PYG{o}{=} \PYG{n}{Simul}\PYG{o}{.}\PYG{n}{create\PYGZus{}default\PYGZus{}params}\PYG{p}{()}
+\PYG{c+c1}{\PYGZsh{}Ahora podemos modificar cosas:}
+
+\PYG{c+c1}{\PYGZsh{}Puntos de discretización}
+\PYG{n}{params}\PYG{o}{.}\PYG{n}{oper}\PYG{o}{.}\PYG{n}{nx} \PYG{o}{=} \PYG{l+m+mi}{64}
+\PYG{n}{params}\PYG{o}{.}\PYG{n}{oper}\PYG{o}{.}\PYG{n}{ny} \PYG{o}{=} \PYG{l+m+mi}{64}
+
+\PYG{c+c1}{\PYGZsh{}Tiempo final de la simulación (Empieza en t=0)}
+\PYG{n}{params}\PYG{o}{.}\PYG{n}{time\PYGZus{}stepping}\PYG{o}{.}\PYG{n}{t\PYGZus{}end} \PYG{o}{=} \PYG{l+m+mf}{5.0}
+
+\end{Verbatim}

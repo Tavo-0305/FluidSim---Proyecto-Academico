@@ -1,0 +1,90 @@
+% -------------------------------------------------------------------
+% PAQUETES BÁSICOS
+% -------------------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{lmodern}
+\usepackage{setspace}
+\onehalfspacing
+
+% -------------------------------------------------------------------
+% MÁRGENES Y ESTILO DE DOCUMENTO
+% -------------------------------------------------------------------
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{parskip}
+\setlength{\parindent}{0pt}
+
+% -------------------------------------------------------------------
+% PAQUETES PARA CÓDIGO (MINTED)
+% REQUIERE COMPILAR CON:   pdflatex -shell-escape archivo.tex
+% -------------------------------------------------------------------
+\usepackage{minted}
+\newminted{shell-session}{
+    fontsize=\small,
+    breaklines=true,
+    autogobble,
+    frame=single,
+    framesep=3mm
+    
+}
+\setminted{
+    fontsize=\small,
+    breaklines=true,
+    linenos=false,
+    autogobble,
+    frame=single,
+    framesep=3mm,
+    breakanywhere=true
+}
+
+% -------------------------------------------------------------------
+% PAQUETES ADICIONALES
+% -------------------------------------------------------------------
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{listings,skins,breakable}
+% CAJAS DE ADVERTENCIA / NOTA
+\tcbset{colback=gray!10, colframe=gray!70, sharp corners}
+
+\newenvironment{nota}{
+    \begin{tcolorbox}[title=Nota]
+}{
+    \end{tcolorbox}
+}
+
+\newenvironment{advertencia}{
+    \begin{tcolorbox}[colback=red!10,colframe=red!60,title=Advertencia]
+}{
+    \end{tcolorbox}
+}
+\usepackage{fancyhdr}
+\setlength{\headheight}{15pt}
+% -------------------------------------------------------------------
+% DOCUMENTO
+% -------------------------------------------------------------------
+\usepackage{graphicx} % IMPORTANTE
+\usepackage{background}
+\usepackage{float}
+
+\backgroundsetup{
+  scale=0.8,
+  angle=0,
+  opacity=0.1,
+  contents={\includegraphics[width=\paperwidth]{images/firma-vertical-dos-lineas-negro.png}}
+}
+
+% Set the page style to "fancy"...
+\pagestyle{fancy}
+%... then configure it.
+\fancyhead{} % clear all header fields
+\fancyhead[L]{\textbf{Guía de uso del Simulador Fluidsim}}
+\fancyfoot{} % clear all footer fields
+\fancyfoot[R]{\thepage}
+\fancyfoot[L]{Gustavo Barboza Blanco - UCR}

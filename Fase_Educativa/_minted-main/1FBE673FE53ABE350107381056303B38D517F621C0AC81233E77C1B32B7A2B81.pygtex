@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+mamba\PYG{+w}{ }create\PYG{+w}{ }\PYGZhy{}n\PYG{+w}{ }fluidsim\PYG{+w}{ }python
+\end{Verbatim}

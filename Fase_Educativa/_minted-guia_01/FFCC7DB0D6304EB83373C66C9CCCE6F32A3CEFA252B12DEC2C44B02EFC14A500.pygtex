@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+wget\PYG{+w}{ }https://github.com/conda\PYGZhy{}forge/miniforge/releases/latest/download/Miniforge3\PYGZhy{}Linux\PYGZhy{}x86\PYGZus{}64.sh
+\end{Verbatim}
