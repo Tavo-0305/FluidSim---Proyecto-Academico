@@ -1,35 +1,35 @@
-# Fluidsim Project – UCR
+# Fluidsim – Proyecto Académico
 
-This repository contains my academic and computational work related to fluid dynamics,
-with a focus on numerical simulations using **FluidSim**, theoretical documentation,
-and educational material developed during my studies at the University of Costa Rica (UCR).
+Este repositorio contiene el desarrollo académico del proyecto **Fluidsim**, el cual abarca
+documentación teórica, guías educativas y simulaciones numéricas utilizando el simulador
+**Fluidsim**, parte del ecosistema **FluidDyn**, escrito en Python.
 
-The project is organized in different phases, reflecting both the pedagogical and
-research-oriented evolution of the work.
+El proyecto está orientado a la **comprensión conceptual**, **uso práctico** y
+**aplicación experimental** de métodos numéricos en dinámica de fluidos.
 
 ---
 
-## Repository Structure
+## 📁 Estructura del repositorio
 
 ```text
 fluidsim/
-│
 ├── anteproyecto/
 │   ├── *.tex
-│   ├── figures/
-│   └── bibliography/
+│   ├── images/
+│   └── archivos relacionados con el anteproyecto
 │
 ├── fase_educativa/
-│   ├── guides/
-│   ├── figures/
-│   └── *.tex
+│   ├── *.tex
+│   ├── images/
+│   └── guías educativas sobre Fluidsim
 │
 ├── fase_experimental/
-│   ├── simulations/
-│   ├── postprocessing/
-│   └── results/
+│   ├── *.py
+│   └── simulaciones numéricas avanzadas
 │
 ├── testing_codes/
 │   ├── *.py
+│   └── scripts de prueba y demostrativos
 │
-└── README.md
+├── README.md
+└── .gitignore
