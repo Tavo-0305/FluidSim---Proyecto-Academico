@@ -1,35 +1,15 @@
 # Fluidsim – Proyecto Académico
 
-Este repositorio contiene el desarrollo académico del proyecto **Fluidsim**, el cual abarca
-documentación teórica, guías educativas y simulaciones numéricas utilizando el simulador
-**Fluidsim**, parte del ecosistema **FluidDyn**, escrito en Python.
+En este proyecto académico se busca evaluar la sensibilidad del **criterio de Okubo-Weiss** para la detección de estructuras coherentes en turbulencia 2D forzada-estacionaria, mediante simulaciones numéricas directas (DNS) pseudoespectrales a distintas resoluciones, contrastando los resultados con lo reportado por Wang, Sesterhenn & Müller (2023).
 
-El proyecto está orientado a la **comprensión conceptual**, **uso práctico** y
-**aplicación experimental** de métodos numéricos en dinámica de fluidos.
+Las simulaciones numéricas serán realizadas con el simulador **FluidSim** basado en python. 
 
----
+En el repositorio se puede encontrar unas serie de guías personalizadas para la instalación del simulador y su uso básico.
 
-## 📁 Estructura del repositorio
+--- 
 
-```text
-fluidsim/
-├── anteproyecto/
-│   ├── *.tex
-│   ├── images/
-│   └── archivos relacionados con el anteproyecto
-│
-├── fase_educativa/
-│   ├── *.tex
-│   ├── images/
-│   └── guías educativas sobre Fluidsim
-│
-├── fase_experimental/
-│   ├── *.py
-│   └── simulaciones numéricas avanzadas
-│
-├── testing_codes/
-│   ├── *.py
-│   └── scripts de prueba y demostrativos
-│
-├── README.md
-└── .gitignore
+Autores: Gustavo Barboza Blanco^{1} & Dr. Tito Maldonado^{2} 
+
+    1. Escuela de Física, Universidad de Costa Rica 
+
+    2. Centro de Investigaciones Geofísicas (CIGEFI), Universidad de Costa Rica 
