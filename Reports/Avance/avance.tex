@@ -1,0 +1,138 @@
+% Plantilla para avance e informe final	FS0751/FS0624				%
+% Traducción y adaptación del archivo:													%
+% http://web.mit.edu/8.13/www/Samplepaper/sample-zipped/sample-paper.pdf 				%
+%																						%
+													%
+% Adaptado de la página de REVTeK-4 de la American Physical Societies					%
+% RECOMENDACIÓN PARA LOS ESTUDIANTES: cada vez que escriba un reporte, empiece con esta plantilla y guárdela con otro nombre. Si le es conveniente, no borre las líneas que no necesita, sino más bien coméntelas con el símbolo "%"											% En caso de tener sugerencias de mejoras puede comunicarlas al coordinador del curso, toda retroalimentación es bienvenida.								%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		
+% PREÁMBULO																				%
+% El preámbulo en un documento LaTeX es el conjunto de comandos que preceden 			%
+% la línea \begin{document} line. Contiene la línea \documentclass para cargar			%
+% las definiciones REVTeK-4 y varias otras líneas \usepackage para cargar				%
+% otros paquetes.																		%
+%																						%
+% ADVERTENCIA A LOS ESTUDIANTES: El preámbulo contiene un conjunto de paquetes necesarios para un compilado apropiado. Se recomienda no eliminar paquetes por completo aunque piense que no los necesita, coméntelos. Ud puede también agregar paquetes según lo vea conveniente.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[aps,twocolumn,secnumarabic,nobalancelastpage,amsmath,amssymb,
+nofootinbib]{revtex4}
+
+
+
+% nofootinbib es otra clase de documento que permite colocar notas al pie de
+% página en la página donde ocurre, en lugar de al final del artículo. De esta
+% manera es más fácil de leer!
+
+% secnumarabic es una manera particular de identificar la secciones por número.
+% para ayudar a la revisión electrónica.
+
+% amsmath and amssymb son necesarias para el ambiente de las subecuaciones, 
+% entre otras
+
+\usepackage{graphics}      % especificaciones gráficas estándar
+\usepackage{graphicx}      % especificaciones alternativas para lso gráficos
+\usepackage{longtable}     % ayuda con las opciones de tablas grandes
+\usepackage{url}           % para referencias en línea
+\usepackage{bm}            % paquete especial 'bold-math'
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}% para que utilice las reglas gramaticales del español
+						   % y reconozca las tildes.
+
+						   
+\usepackage[letterpaper,top= 2.75cm,bottom=3.5cm,left=1.8cm,right=1.8cm]{geometry}%margenes
+\usepackage{ifsym}                        %Símbolos matemáticos
+\usepackage{amssymb}                      %AMS
+\usepackage{amsmath}                      %AMS
+\usepackage{amsthm}                       %AMS teorema
+\usepackage{color}                        %LaTex Color
+
+%\usepackage{multicol}                     %Permite escribir en columnas
+%\usepackage{multirow}                                                   %Permite escribir en filas
+\usepackage{multienum}                    %Permite colocar una lista en columnas
+\usepackage{tabularx}                     %Permite generar tabuladores con ancho ajustables
+\usepackage{booktabs}                     %Características especiales para tablas
+%\usepackage{caption}    
+
+%Cambia los caption
+\usepackage{fancyhdr}
+\usepackage{pgf}
+\usepackage{tikz}
+\tikzstyle{guiones}+=[dashed]
+\usetikzlibrary{patterns,arrows,snakes,shapes,automata,plotmarks,backgrounds}
+\usepackage{lscape}
+\usepackage{titlesec}
+\usepackage{array,ragged2e}
+\newcolumntype{P}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\usepackage{float}
+\setlength{\columnsep}{7.5mm} 
+
+\titleformat*{\section}{\normalsize\bfseries}
+\titleformat*{\subsection}{\normalsize\bfseries}				   
+						   
+\def\bibsection{\section*{\refname}} 
+\usepackage[pdfborder={0 0 0},colorlinks=false]{hyperref}
+\usepackage{xurl} %Paquete para poder incluir enlaces largos de url en las referencias.
+\usepackage{adjustbox}
+
+\graphicspath{{../shared/img/}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+%                                 		%
+% Y ahora, el comienzo del documento... %
+%                                 		%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+% Acá se ponen los logos institucionales para la primer página del reporte.
+{\begin{center}
+\vskip-25pt 
+{\includegraphics[width = 175mm]{LogosInstitucionales.png}}
+\end{center}}
+
+% Título de la práctica, nombre, apellidos, carnet y correo de las personas involucradas
+\title			{Escribiendo informes científicos usando \LaTeX}
+\author         {Nombre y Apellidos - estudiante} % La palabra estudiante la borran
+\email          {usuario.institucional@ucr.ac.cr}
+\author         {Nombre y Apellidos - supervisor}% La palabra supervisor la borran
+\email          {usuario.institucional@ucr.ac.cr}
+\affiliation    {Escuela de Física, Universidad de Costa Rica}
+\date{\today} %la fecha sale de forma automática
+
+\begin{abstract}
+\end{abstract}
+
+\maketitle
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Resultados y discusión}
+Testing \cite{feynman1982}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusiones}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Coloque todas las referencias usadas en este artículo en un archivo					%
+% con el mismo nombre que lleva el comando \bibliography 								%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Agradecimientos} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Ahora añadimos el archivo fuente de la bobliografía(sin incluir el .bib)				% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliography{../shared/sample-paper}
+\bibliographystyle{apsrev4-1}
+
+
+\clearpage
+\appendix
+
+
+\end{document}
