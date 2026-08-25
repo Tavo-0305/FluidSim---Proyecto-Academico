@@ -94,12 +94,15 @@ nofootinbib]{revtex4}
 \end{center}}
 
 % Título de la práctica, nombre, apellidos, carnet y correo de las personas involucradas
-\title			{Escribiendo informes científicos usando \LaTeX}
-\author         {Nombre y Apellidos - estudiante} % La palabra estudiante la borran
-\email          {usuario.institucional@ucr.ac.cr}
-\author         {Nombre y Apellidos - supervisor}% La palabra supervisor la borran
+\title			{Sensibilidad del criterio de Okubo-Weiss 
+				ante cambios de resolución en simulaciones 
+				DNS de turbulencia 2D}
+\author         {Gustavo Barboza Blanco} % La palabra estudiante la borran
+\email          {gustavo.barbozablanco@ucr.ac.cr}
+\author         {Tito Maldonado}% La palabra supervisor la borran
 \email          {usuario.institucional@ucr.ac.cr}
 \affiliation    {Escuela de Física, Universidad de Costa Rica}
+\affiliation    {    Centro de Investigaciones Geofísicas (CIGEFI), Universidad de Costa Rica }
 \date{\today} %la fecha sale de forma automática
 
 \begin{abstract}
@@ -107,25 +110,55 @@ nofootinbib]{revtex4}
 
 \maketitle
 
+\section{Introducción}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Resultados y discusión}
-Testing \cite{feynman1982}
+\section{Objetivo Principal}
+Evaluar la sensibilidad del criterio de Okubo-Weiss 
+en la detección de estructuras coherentes en turbulencia
+bidimensional forzada y estacionaria, mediante simulaciones 
+numéricas directas (DNS) pseudoespectrales a 
+distintas resoluciones, contrastando
+con los resultados reportados por 
+Wang, Sesterhenn y Müller (2023).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Conclusiones}
+\section{Obtjetivos Específicos}
+\begin{enumerate}
+    \item Implementar y validar una simulación 
+	numérica directa (DNS) de turbulencia bidimensional 
+	forzada y estacionaria mediante el solver \texttt{ns2d} 
+	de Fluidsim, incorporando forzamiento estocástico a 
+	pequeña escala y amortiguamiento a gran escala, y verificando 
+	la existencia de un estado estadísticamente estacionario 
+	mediante el análisis temporal de la energía y la enstrofía.
+
+    \item Evaluar la sensibilidad del criterio de Okubo-Weiss a 
+	la resolución espacial mediante su aplicación a campos de f
+	lujo obtenidos a distintas resoluciones de malla, cuantificando 
+	la fracción de área y las características de las regiones 
+	identificadas como estructuras coherentes.
+
+    \item Analizar la distribución espectral de la energía en 
+	las regiones coherente y residual a distintas resoluciones, 
+	comparando los espectros $E_{\mathrm{coherente}}(k)$, 
+	$E_{\mathrm{residual}}(k)$ y $E_{\mathrm{total}}(k)$ con 
+	los resultados reportados por Wang, Sesterhenn y Müller (2023), 
+	y evaluando la conservación del comportamiento de escala $k^{-5/3}$ 
+	de la componente residual al reducir la resolución.
+\end{enumerate}
+
+\section{Pregunta de Investigación}
+¿Qué tan robusto es el criterio de Okubo-Weiss para identificar estructuras
+coherentes ante una reducción de la resolución espacial en simulaciones de
+turbulencia bidimensional forzada?
+
+\section{Marco Teórico}
+Testing \cite{wang2023}
+
+\section{Metodología}
+
+\section{Cronograma de actividades}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Coloque todas las referencias usadas en este artículo en un archivo					%
-% con el mismo nombre que lleva el comando \bibliography 								%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{Agradecimientos} 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Ahora añadimos el archivo fuente de la bobliografía(sin incluir el .bib)				% 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \bibliography{../shared/sample-paper}
 \bibliographystyle{apsrev4-1}
