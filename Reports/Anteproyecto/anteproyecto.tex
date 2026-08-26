@@ -117,7 +117,7 @@ una consecuencia de este acontecimiento en flujos es la formación de estructura
 por ejemplo, en turbulencias hidrodinámicas bidimensionales existe un proceso de 
 formación de dichas estructuras asociadas con la cascada inversa de energía cinética,
 es decir una transferencia energética de escalas menores a mayores. Esto ha sido analizado
-por vaias simulaciones y experimentos. \cite{boffetta2010}
+por varias simulaciones y experimentos. \cite{boffetta2010}
 
 Los vórtices son estructuras coherentes que surgen naturalmente, ya sea una forma simple
 o una combinación de varias de estas configuraciones. Dada la naturaleza turbulenta 
@@ -125,15 +125,29 @@ bidimensional de estos sistemas, implementar simulaciones numéricas de dichos f
 resulta conveniente para esta investigación.  
 
 Definir matemáticamente un vórtice resulta complicado, sin embargo un entendido 
-aceptable para cualquier estructura coherente es la persistencia en un lapso finito de 
+aceptable para cualquier estructura coherente es la persistencia de ciertas características en un lapso finito de 
 tiempo \cite{chakraborty2005}. Una forma de abarcar este problema es mediante el desarrollo de distintos esquemas
-o criterios para identificar dichas estructuras
+o criterios para identificar dichas estructuras.
 
-Wang et al compara tres esquemas a alta resolución $(4096^{2})$
+En su trabajo titulado ``\textit{Coherent structure detection and the inverse cascade mechanism in two-dimensional
+Navier -- Stokes turbulence}'', Wang et al. (2023) estudian tres esquemas de detección de
+vórtices (OW, VM, LCS) en turbulencia forzada a alta resolución. \cite{wang2023}
 
-No se explora la sensibilidad del criterio OW a bajas reoluciones 
+Dicho análisis se realiza a una única resolución numérica, 
+considerablemente alta ($4096^2$), sin examinar cómo se comporta el 
+criterio de Okubo--Weiss (OW) cuando la resolución se ve variada.
 
-Anunciar el objetivo general como puente a la siguiente sección 
+Esta omisión es relevante porque trabajos previos en turbulencia 2D forzada han 
+mostrado que la resolución relativa entre la escala de forzamiento y la malla 
+numérica afecta directamente la formación de vórtices coherentes y la forma 
+del espectro de energía \citep{scott2007}, \cite{vallgren2011}. Lo cual deja una 
+puerta abierta a explorar la robustez del crietio empleado ante estos cambios.
+
+En este trabajo se evalúa la sensibilidad del 
+criterio de Okubo--Weiss para la detección de 
+estructuras coherentes en turbulencia 2D forzada--estacionaria, 
+mediante simulaciones numéricas directas a distintas resoluciones, 
+contrastando los resultados obtenidos con los reportados por \citet{wang2023}.
 
 \section{Objetivo Principal}
 Evaluar la sensibilidad del criterio de Okubo-Weiss 
@@ -175,7 +189,6 @@ coherentes ante una reducción de la resolución espacial en simulaciones de
 turbulencia bidimensional forzada?
 
 \section{Marco Teórico}
-Testing \cite{wang2023}
 
 \section{Metodología}
 
