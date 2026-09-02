@@ -95,7 +95,7 @@ nofootinbib]{revtex4}
 
 % Título de la práctica, nombre, apellidos, carnet y correo de las personas involucradas
 \title			{Sensibilidad del criterio de Okubo-Weiss 
-				ante cambios de resolución en simulaciones 
+				ante cambios de resolución espacial en simulaciones 
 				DNS de turbulencia 2D}
 \author         {Gustavo Barboza Blanco} % La palabra estudiante la borran
 \email          {gustavo.barbozablanco@ucr.ac.cr}
@@ -112,30 +112,39 @@ nofootinbib]{revtex4}
 
 \section{Introducción}
 
-La turbulencia es un fenómeno ampliamente observado en la naturaleza,
-una consecuencia de este acontecimiento en flujos es la formación de estructuras,
+La turbulencia es un fenómeno ampliamente observado en la naturaleza, laboratorios y simulaciones, 
+una consecuencia de este acontecimiento en flujos es la formación de estructuras coherentes,
 por ejemplo, en turbulencias hidrodinámicas bidimensionales existe un proceso de 
 formación de dichas estructuras asociadas con la cascada inversa de energía cinética,
-es decir una transferencia energética de escalas menores a mayores. Esto ha sido analizado
-por varias simulaciones y experimentos. \cite{boffetta2010}
+es decir una transferencia energética de escalas menores a mayores, fenómeno documentado 
+tanto en simulaciones numéricas como en experimentos de laboratorio 
+\cite{boffetta2010} \cite{wang2023} \cite{chen2006} \cite{xiao2009} \cite{benzi1986}.
 
 Los vórtices son estructuras coherentes que surgen naturalmente, ya sea una forma simple
 o una combinación de varias de estas configuraciones. Dada la naturaleza turbulenta 
 bidimensional de estos sistemas, implementar simulaciones numéricas de dichos fenómenos
-resulta conveniente para esta investigación.  
+resulta conveniente para esta investigación. \cite{wang2023}
 
-Definir matemáticamente un vórtice resulta complicado, sin embargo un entendido 
+Definir matemáticamente una estructura coherente resulta complicado, sin embargo un entendido 
 aceptable para cualquier estructura coherente es la persistencia de ciertas características en un lapso finito de 
 tiempo \cite{chakraborty2005}. Una forma de abarcar este problema es mediante el desarrollo de distintos esquemas
 o criterios para identificar dichas estructuras.
 
-En su trabajo titulado ``\textit{Coherent structure detection and the inverse cascade mechanism in two-dimensional
-Navier -- Stokes turbulence}'', Wang et al. (2023) estudian tres esquemas de detección de
-vórtices (OW, VM, LCS) en turbulencia forzada a alta resolución. \cite{wang2023}
-
-Dicho análisis se realiza a una única resolución numérica, 
-considerablemente alta ($4096^2$), sin examinar cómo se comporta el 
-criterio de Okubo--Weiss (OW) cuando la resolución se ve variada.
+Esta dificultad no es un problema nuevo, 
+ha acompañado el estudio de la turbulencia desde hace varias décadas, y ha llevado al 
+desarrollo de múltiples criterios de detección, entre ellos: Okubo--Weiss, la magnitud de 
+vorticidad (VM) y las estructuras coherentes lagrangianas (LCS), cada uno construido sobre 
+supuestos distintos acerca de qué características debe cumplir una región del flujo para 
+considerarse una estructura coherente. Sin embargo, no existe 
+consenso sobre cuál criterio es más adecuado, y trabajos como el de Wang et al. (2023) 
+han mostrado que criterios distintos pueden identificar regiones distintas del mismo campo 
+de flujo, evidenciando que la elección del criterio no es neutral. Esta discusión resulta 
+relevante más allá de la turbulencia hidrodinámica bidimensional, ya que problemas análogos 
+de identificación de estructuras coherentes aparecen en otras áreas de la física, como la astrofísica. 
+Es en este contexto que resulta pertinente evaluar la robustez de un criterio ampliamente 
+usado como el de Okubo--Weiss ante cambios en la resolución espacial, dado 
+que dicha robustez condiciona directamente qué tan generalizables son los 
+resultados obtenidos a una única resolución, como los reportados por Wang et al. (2023). \cite{wang2023}
 
 Esta omisión es relevante porque trabajos previos en turbulencia 2D forzada han 
 mostrado que la resolución relativa entre la escala de forzamiento y la malla 
@@ -147,21 +156,19 @@ En este trabajo se evalúa la sensibilidad del
 criterio de Okubo--Weiss para la detección de 
 estructuras coherentes en turbulencia 2D forzada--estacionaria, 
 mediante simulaciones numéricas directas a distintas resoluciones, 
-contrastando los resultados obtenidos con los reportados por \citet{wang2023}.
+para evaluar su impacto en criterios de detección como el criterio OW.
 
 \section{Objetivo Principal}
 Evaluar la sensibilidad del criterio de Okubo-Weiss 
 en la detección de estructuras coherentes en turbulencia
 bidimensional forzada y estacionaria, mediante simulaciones 
 numéricas directas (DNS) pseudoespectrales a 
-distintas resoluciones, contrastando
-con los resultados reportados por 
-Wang, Sesterhenn y Müller (2023).
+distintas resoluciones.
 
 \section{Obtjetivos Específicos}
 \begin{enumerate}
-    \item Implementar y validar una simulación 
-	numérica directa (DNS) de turbulencia bidimensional 
+    \item Implementar una simulación  numérica directa (DNS) 
+	de turbulencia bidimensional 
 	forzada y estacionaria mediante el solver \texttt{ns2d} 
 	de Fluidsim, incorporando forzamiento estocástico a 
 	pequeña escala y amortiguamiento a gran escala, y verificando 
@@ -169,17 +176,14 @@ Wang, Sesterhenn y Müller (2023).
 	mediante el análisis temporal de la energía y la enstrofía.
 
     \item Evaluar la sensibilidad del criterio de Okubo-Weiss a 
-	la resolución espacial mediante su aplicación a campos de f
-	lujo obtenidos a distintas resoluciones de malla, cuantificando 
+	la resolución espacial mediante su aplicación a campos de flujo 
+	obtenidos a distintas resoluciones de malla, cuantificando 
 	la fracción de área y las características de las regiones 
 	identificadas como estructuras coherentes.
 
     \item Analizar la distribución espectral de la energía en 
-	las regiones coherente y residual a distintas resoluciones, 
-	comparando los espectros $E_{\mathrm{coherente}}(k)$, 
-	$E_{\mathrm{residual}}(k)$ y $E_{\mathrm{total}}(k)$ con 
-	los resultados reportados por Wang, Sesterhenn y Müller (2023), 
-	y evaluando la conservación del comportamiento de escala $k^{-5/3}$ 
+	las regiones coherente y residual a distintas resoluciones,  
+	y evaluando la conservación del comportamiento de escala, $k^{-5/3}$,
 	de la componente residual al reducir la resolución.
 \end{enumerate}
 
@@ -190,10 +194,111 @@ turbulencia bidimensional forzada?
 
 \section{Marco Teórico}
 
+\subsection{Turbulencia Bidimensional}
+La turbulencia bidimensional es estado idealizado del movimiento caótico 
+de un fluido donde las fluctuaciones y la velocidad se 
+limitan exclusivamente a un plano de dos dimensiones, 
+tal que las ecuaciones de Navier--Stokes incompresibles son: 
+
+\begin{equation}
+\partial_t \mathbf{u} + (\mathbf{u}\cdot\nabla)\mathbf{u} = -\nabla p + \nu \nabla^2 \mathbf{u} + \mathbf{f}, \quad \nabla\cdot\mathbf{u}=0.
+\end{equation}
+
+\subsection{Cascada de energía y Enstrofía}
+
+La vorticidad se reduce a un escalar $\omega=\partial_x u_y - \partial_y u_x$ \cite{chen2006}.
+A diferencia del caso 3D, en 2D se conservan simultáneamente 
+la energía $E$ y la enstrofía $\Omega$, lo que da lugar al escenario de 
+doble cascada, la energía inyectada en $k_f$ migra 
+hacia escalas mayores (cascada inversa), mientras la enstrofía migra 
+hacia escalas menores (cascada directa) \cite{boffetta2010}. 
+
+Dicha teoría predice $E(k)\sim k^{-5/3}$ para $k\ll k_f$ y $E(k)\sim k^{-3}$ 
+para $k\gg k_f$. Numéricamente, el estado estacionario se sostiene forzando a 
+pequeña escala y amortiguando a gran escala \cite{vallgren2011} \cite{basdevant1994}. 
+
+La cascada inversa favorece la fusión de 
+vórtices pequeños en estructuras coherentes de mayor tamaño y 
+persistencia \cite{wang2023}. Aunque no existe 
+una definición matemática única de estructura coherente, se acepta que 
+corresponde a regiones donde ciertas propiedades del flujo persisten un 
+tiempo finito \cite{chakraborty2005}. Los métodos de umbral detectan 
+coherencia descomponiendo $\omega=\omega_c+\omega_r$ según si una cantidad 
+indicadora $\phi(\mathbf{x})$ supera o no un umbral $\phi_{thr}$.
+
+\subsection{Criterio de Okubo--Weiss}
+
+El criterio de Okubo--Weiss usa $\phi=Q_{OW}$, definido a partir de la 
+descomposición del gradiente de velocidad en su parte simétrica (deformación, $\mathbf{S}$) 
+y antisimétrica (rotación, $\mathbf{W}$):
+
+\begin{equation}
+Q_{OW}=\tfrac{1}{2}\left(\tfrac{1}{2}\omega^2-|\mathbf{S}|^2\right).
+\end{equation}
+
+Si $Q_{OW}>0$ domina la rotación (núcleo vortical); si $Q_{OW}<0$ domina 
+la deformación (zonas de cizalla) \cite{okubo1970} \cite{weiss1991}. 
+El umbral $\phi_{thr}=0$ no requiere calibración externa, pero 
+el criterio no es objetivo y favorece estructuras circulares 
+\cite{wang2023}. 
+
+Como $Q_{OW}$ depende de derivadas espaciales de $\mathbf{u}$, 
+su valor es sensible a la resolución de malla: una malla insuficiente 
+suaviza gradientes y puede alterar la fracción de área y forma de las 
+estructuras detectadas, lo cual motiva la pregunta de este trabajo.
+
 \section{Metodología}
 
-\section{Cronograma de actividades}
+Se emplea simulación numérica directa (DNS) con el solver 
+pseudoespectral \texttt{ns2d} de Fluidsim, que resuelve la ecuación 
+de vorticidad forzada--amortiguada.
 
+\begin{equation}
+\partial_t \hat\omega + \widehat{(\mathbf{u}\cdot\nabla)\omega} = \nu k^2\hat\omega + \hat f_\omega - d(k)\hat\omega
+\end{equation}
+
+Esta simulación resuelve las ecuaciones del fluido en cada punto de una malla, empujando el flujo con 
+un forzamiento pequeño y aleatorio (que le da energía a escalas pequeñas) y frenándolo con un amortiguamiento 
+en las escalas grandes (para que no crezca sin control por la cascada inversa). 
+Esto permite que el flujo llegue a un estado estable que se puede analizar.
+
+Se hacen tres simulaciones exactamente iguales entre sí, cambiando únicamente la resolución de la malla: $256^2$, $512^2$ y $1024^2$ puntos. 
+Todo lo demás (forzamiento, escala donde se inyecta energía, tipo de amortiguamiento) 
+se mantiene proporcionalmente igual entre las tres, para que cualquier diferencia que se observe 
+se deba solo al cambio de resolución y no a otro factor.
+
+Antes de analizar cada simulación, se verifica que el flujo haya llegado a un estado estacionario: 
+se grafica la energía y la enstrofía en el tiempo, y se espera a que dejen de crecer y solo oscilen alrededor 
+de un valor promedio. Solo se usan los datos de la simulación después de ese punto.
+
+Una vez que cada simulación está en estado estacionario, se toman varias capturas del campo de flujo en distintos momentos. 
+A cada una se le aplica el criterio de Okubo--Weiss: se calcula el valor de $Q_{OW}$ en cada punto de la malla, 
+y se clasifica ese punto como parte de una estructura coherente si $Q_{OW}$ es positivo, o como parte del flujo residual 
+(no coherente) si es negativo.
+
+Finalmente, se comparan los resultados obtenidos entre las tres resoluciones usando ciertas medidas:
+el porcentaje del área total quedó clasificado como coherente, cómo lucen esas estructuras: cuántas hay, 
+qué tan grandes son en promedio y cómo varía su tamaño, cómo se distribuye la energía en función de 
+la escala, por separado para la parte coherente y la residual, revisando si la parte residual sigue cumpliendo 
+la ley de potencia $k^{-5/3}$ esperada al bajar la resolución.
+
+Si el criterio de Okubo--Weiss es robusto, estas tres medidas deberían verse muy parecidas en las tres resoluciones. 
+Si en cambio cambian de forma sistemática al bajar la resolución, esto indicaría que el criterio depende artificialmente 
+de qué tan fina sea la malla numérica, y no solo de la física del flujo.
+
+\section{Cronograma de Actividades}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lcccc}
+\hline
+Actividad & S1--2 & S3--5 & S6--8 & S9--10 \\
+\hline
+\hline
+\end{tabular}
+\caption{Cronograma tentativo (semanas).}
+\end{table}
 
 
 \bibliography{../shared/sample-paper}
