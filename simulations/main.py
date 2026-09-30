@@ -107,6 +107,6 @@ def run_simulation(N, t_end, injection_rate=13.05, fft_backend='fftwmpi2d', use_
 
 if __name__ == "__main__":
     #test local: serial, sin MPI
-    #sim = run_simulation(N=512, t_end=0.2, injection_rate=13.05,fft_backend=None, use_mpi=False)
+    sim = run_simulation(N=1024, t_end=600, injection_rate=13.05,fft_backend=None, use_mpi=False)
     #Para cluster:
-    sim = run_simulation(N=512, t_end=0.2, injection_rate=13.05,fft_backend='fftwmpi2d', use_mpi=True)
+    #sim = run_simulation(N=512, t_end=0.2, injection_rate=13.05,fft_backend='fftwmpi2d', use_mpi=True)
