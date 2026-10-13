@@ -377,7 +377,7 @@ de qué tan fina sea la malla numérica, y no solo de la física del flujo.
 \centering
 \scriptsize
 \setlength{\tabcolsep}{2pt}
-\begin{tabular}{|p{3.1cm}|c|}
+\begin{tabular}{cc}  %%|p{3.1cm}|c|
 \hline
 \textbf{Actividad} & \textbf{Semanas} \\
 \hline
@@ -396,9 +396,73 @@ Elaboración de informe final, presentación y póster & 11--16 \\
 \label{tab:cronograma}
 \end{table}
 
+\section{Bitácora}
+
+\subsection*{Semana 5 (7--11 de setiembre)}
+Se implementó una primera versión secuencial de la simulación 
+numérica directa con el solver \texttt{ns2d} de Fluidsim, 
+para a ejecutarse en una computadora personal. 
+El código construye los parámetros físicos y numéricos 
+para una resolución dada y avanza la integración temporal 
+hasta un tiempo final, con un forzamiento aleatorio en una 
+banda estrecha alrededor de $k_f = 200$, 
+viscosidad a pequeña escala y un amortiguamiento 
+gaussiano de gran escala,según lo establecido en la metodología. 
+Se realizaron pruebas  cortas para verificar su funcionamiento.
+
+\subsection*{Semana 6 (14--18 de setiembre)}
+Se adaptó el código para ejecutarse en paralelo con MPI, 
+utilizando un backend de transformadas de Fourier con descomposición 
+de dominio, y se investigó la instalación de las bibliotecas necesarias. 
+En esta semana se solicitó el acceso al cluster de cómputo.
+
+\subsection*{Semana 7 (21--25 de setiembre)}
+Mientras se esperaba la aprobación del acceso al 
+cluster, se continuó con pruebas locales de la versión 
+serial y se revisó la documentación de Fluidsim sobre la 
+descomposición del dominio y el manejo de los archivos de salida. 
+El acceso se obtuvo hacia el final de la semana.
+
+\subsection*{Semana 8 (28 de setiembre--2 de octubre)}
+Se realizaron los primeros intentos de ejecutar la 
+versión paralela en el cluster, sin éxito. 
+En paralelo, se corrió localmente una simulación 
+serial a resolución $1024^2$ y se desarrolló un script
+de análisis que grafica la vorticidad, la energía y la enstrofía,
+y calcula el parámetro de Okubo--Weiss a partir de gradientes de 
+velocidad espectrales para estimar la fracción del dominio dominada 
+por rotación. Este script se probó sobre un instante temprano de la 
+simulación solo para validar el flujo de trabajo.
+
+\subsection*{Semana 9 (5--9 de octubre)}
+Se reestructuró el código incorporando el amortiguamiento 
+gaussiano dentro del propio solver, y se añadieron una 
+interfaz de línea de comandos y opciones para el trabajo 
+en el cluster, como detención automática por tiempo máximo 
+y la reanudación desde un estado guardado. Con esta versión 
+se ejecutaron con éxito dos simulaciones en el cluster, 
+a resoluciones de $1024^2$ y $2048^2$.
+
+\subsection*{Semana 10 (12--13 de octubre)}
+Se revisaron las simulaciones obtenidas y 
+se inició la redacción del presente avance.
+
+\section{Resultados Preliminares}
+
+\section{Problemáticas}
+
+Las primeras ejecuciones de la simulación en el cluster no 
+se lograron completar con éxito durante las primeras semanas. 
+El error se resolvió al sustituir el manejador de paquetes utilizado,
+mamba, por pixi. Al revisar la documentación de Fluidsim se encontró 
+una versión de la instalación basada en pixi, en la cual se crean 
+dos ambientes distintos: uno para ejecuciones seriales y otro para 
+ejecuciones en paralelo. La instalación de ambos ambientes en el 
+cluster funcionó correctamente y permitió ejecutar las primeras simulaciones.
+
 \section{Uso de la inteligencia artifical}
 
-Para este anteproyecto se usó la inteligencia artifical
+Para la elaboración de las secciones correspondientes al anteproyecto se usó la inteligencia artifical
 para consultas con respecto al simulador FluidSim y la estructura metodológica.
 
 
