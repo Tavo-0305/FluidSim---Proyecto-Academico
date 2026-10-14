@@ -441,13 +441,73 @@ interfaz de línea de comandos y opciones para el trabajo
 en el cluster, como detención automática por tiempo máximo 
 y la reanudación desde un estado guardado. Con esta versión 
 se ejecutaron con éxito dos simulaciones en el cluster, 
-a resoluciones de $1024^2$ y $2048^2$.
+a una resolución de $1024^2$.
 
 \subsection*{Semana 10 (12--13 de octubre)}
 Se revisaron las simulaciones obtenidas y 
 se inició la redacción del presente avance.
 
 \section{Resultados Preliminares}
+
+\subsection*{Análisis preliminar de la energía y la enstrofía}
+
+La Figura~\ref{fig:spatial_means} muestra la 
+evolución temporal de la energía $E(t)$ y de 
+la enstrofía $Z(t)$ para la simulación a resolución
+$1024^2$ hasta $t=600$. Ambas magnitudes crecen de 
+forma abrupta durante los primeros instantes y 
+alcanzan un valor casi constante, alrededor de
+$E\approx7.7\times10^{-5}$ y $Z\approx3.07$, 
+alrededor del cual solo oscilan con una amplitud
+muy pequeña hasta el final de la simulación. 
+En este sentido, el sistema alcanza un estado
+estadísticamente estacionario en un tiempo muy 
+corto, y no se observa crecimiento sostenido de la energía.
+
+Sin embargo, el cociente $Z/E\approx4\times10^{4}$ 
+es cercano a $k_f^2=200^2$, lo cual indica que tanto 
+la energía como la enstrofía se concentran en la 
+escala de forzamiento. Esto es consistente con el 
+campo de $Q_{OW}$ obtenido, dominado por dicha escala, 
+y sugiere que en esta simulación la energía no se 
+transfiere de manera apreciable hacia escalas mayores, 
+es decir, que la cascada inversa no se desarrolla de 
+forma visible. Por lo tanto, el comportamiento estacionario 
+observado en $E(t)$ y $Z(t)$ no es suficiente por 
+para concluir que el flujo contiene estructuras 
+coherentes de gran escala, por lo que será necesario 
+verificarlo mediante el espectro $E(k)$.
+
+Además también se deben realizar más simulaciones con distintas
+resoliciones y comprobar si hay comportamientos similares. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{1024_data/spatialmeans.pdf}
+    \caption{Evolución temporal de la energía $E(t)$ (arriba) y de la enstrofía $Z(t)$ (abajo) para la simulación a resolución $1024^2$.}
+    \label{fig:spatial_means}
+\end{figure}
+
+\subsection*{Análisis preliminar del criterio de Okubo--Weiss}
+
+La Figura~\ref{fig:ow_t500} muestra el campo 
+de $Q_{OW}$ en un recorte de $140\times140$ puntos 
+de la malla de $1024^2$, en $t=500$. Predomina un patrón
+fino de puntos rojos ($Q_{OW}>0$, dominio de la rotación) 
+y azules ($Q_{OW}<0$, dominio de la deformación) que se 
+van alternando. 
+
+No se distinguen vórtices 
+aislados ni regiones extensas de un mismo signo, 
+solo se aprecia un patrón débil de la intensidad, 
+con zonas de valores cercanos a cero y otras de mayor amplitud.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{1024_data/OW.pdf}
+    \caption{Campo de $Q_{OW}$ en $t=500$ para un recorte de $256\times256$ puntos de la simulación a resolución $1024^2$. Los puntos rojos indican dominio de la rotación y los azules, de la deformación.}
+    \label{fig:ow_t500}
+\end{figure}
 
 \section{Problemáticas}
 

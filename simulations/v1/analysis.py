@@ -79,7 +79,7 @@ def graficar_ow(OW, fig_dir):
 
 
 if __name__ == "__main__":
-    path_run = "/home/gustavo/Sim_data/NS2D_1024x1024_S2pix2pi_2026-09-28_18-37-18"
+    path_run = "/home/gustavo/clusterDATA/NS2D_1024x1024_S2pix2pi_2026-10-09_09-35-47"
     fig_dir = os.path.join(path_run, "figures")
 
     sim = load_sim_for_plot(path_run)
