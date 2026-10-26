@@ -85,7 +85,7 @@ def graficar_ow(Q_OW, fig_dir):
 
 
 if __name__ == "__main__":
-    path_run = "/home/gustavo/clusterDATA/NS2D_1024x1024_S2pix2pi_2026-10-09_09-35-47"
+    path_run = "/home/gustavo/Sim_data/ns2d_gaussian_damping/NS2D_512x512_S2pix2pi_2026-10-19_14-14-10"
     fig_dir = os.path.join(path_run, "figures")
 
     sim = load_sim_for_plot(path_run)
@@ -95,8 +95,8 @@ if __name__ == "__main__":
     # ----------------------------------------
     params_full = Simul.create_default_params()
 
-    params_full.oper.nx = 1024
-    params_full.oper.ny = 1024
+    params_full.oper.nx = 512
+    params_full.oper.ny = 512
     params_full.oper.Lx = sim.params.oper.Lx
     params_full.oper.Ly = sim.params.oper.Ly
     params_full.oper.type_fft = sim.params.oper.type_fft
@@ -108,7 +108,7 @@ if __name__ == "__main__":
     # ----------------------------------------
     graficar_generales(sim, fig_dir)
 
-    Q_OW, omega = calcular_okubo_weiss(sim, oper_full, 500)
+    Q_OW, omega = calcular_okubo_weiss(sim, oper_full, 0.12)
 
     graficar_ow(Q_OW, fig_dir)
 
